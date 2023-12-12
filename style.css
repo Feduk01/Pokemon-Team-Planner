@@ -107,25 +107,6 @@ main button:last-child {
     transition: all 0.3s ease;
 }
 
-.search-item:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.add-to-team,
-.add-to-reserv {
-    position: absolute;
-    bottom: 10%; /* Или другое значение для позиционирования */
-    left: 50%;
-    transform: translateX(-50%); /* Центрирование кнопок */
-    display: none; /* Скрыть кнопки по умолчанию */
-    transition: all 0.3s ease;
-}
-
-.search-item:hover .add-to-team,
-.search-item:hover .add-to-reserv {
-    display: block;
-}
-
 .search-item img {
     max-width: 100%;
     max-height: 100%;
@@ -151,6 +132,32 @@ main button:last-child {
 .pokemon-skills {
     font-size: 1em;
     color: #fff;
+}
+
+.buttons-container {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.buttons-container button {
+    margin: 0 5px;
+    width: 8em;
+}
+
+.search-item:hover .buttons-container {
+    display: flex;
+}
+
+.search-item:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.search-item:hover img,
+.search-item:hover .pokemon-info {
+    visibility: hidden;
 }
 
 @media (min-width: 600px) {
