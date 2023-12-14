@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* border: 3px solid black; */
+    border: 1px solid black;
 }
 
 html {
@@ -10,44 +10,47 @@ html {
 }
 
 body {
-    background-image: url(./img/background.jpg);
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: rgb(53, 134, 227);
     color: aliceblue;
     height: 100%;
     margin: 0;
+    padding: 2em;
 }
 
 .page-container {
     display: flex;
     flex-direction: column;
-    padding: 1em;
+    border-radius: 1em;
     height: 100%;
+    background-color: brown;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    /* padding: 0 5em; */
 }
 
 h1 {
     text-shadow: 4px 4px 2px black;
-    margin-top: 1.5em;
+    /* margin-top: 1.5em; */
     font-size: 3em;
-    display: flex;
-    /* flex-direction: column; */
+    /* display: flex;
+    flex-direction: column; */
     justify-content: center; /* Центрирование по вертикали */
     align-items: center;
     text-align: center;
 }
+/* =================================================================================================== */
 
 .start-page {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Центрирование по вертикали */
     align-items: center; /* Центрирование по горизонтали */
-    height: 100%;
+    /* height: 100%; */
 }
 
 .start-page button {
-    padding: 0.5em;
+    /* padding: 0.5em; */
     min-width: 9em;
     min-height: 3em;
     margin-bottom: 3em;
@@ -130,8 +133,14 @@ main button:last-child {
 }
 
 .pokemon-skills {
+    font-size: 0.8em;
+    color: #fff;
+}
+
+.pokemon-type {
     font-size: 1em;
     color: #fff;
+    margin-bottom: 0.5em;
 }
 
 .buttons-container {
