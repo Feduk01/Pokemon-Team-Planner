@@ -8,46 +8,48 @@
     <script type="module" src="./js/script.js"></script>
 </head>
 <body>
-
-    <!-- Main Menu View-->
-
-    <div class="page-container">
+    <main class="main">
         <section id="startView">
-            <img src="./img/pokeballsvg.png" alt="" width="70em">
-            <header>
-                <h1>Pokemon Team Planer</h1>
-            </header>
-            
-            <main class="start-page">
-                <button id="search">Pokemon Search</button>
-                <button id="team">My team</button>
-                <button id="reserv">Reserv List</button>
-            </main>
-        </section>
+        <header class="header-home">
+            <div class="container">
+                <div class="logo-wrapper">
+                    <img src="./img/pokeballsvg.png" width="40em" alt="">
+                    <h1>Pokemon Team Planner</h1>
+                </div>
+            </div>
+        </header>
         
-
-        <!-- Seacrh View -->
-
+        <div class="container">
+            <div class="button-container">
+                <button id="search">Search a pokemon</button>
+                <button id="team">My team</button>
+                <button id="reserv">Reserv</button>
+            </div>
+        </div>
+    </section>
 
         <section id="pokemonSearchDisplay">
-            <button id="menu">Back</button>
-            <header>
-                <h1>Seacrh your Pokemon</h1>
-                <div class="sub-title">
-                    <input id="searchInput" type="text" placeholder="Enter Pokemon name">
-                    <button id="searchPokemonBtn">Search</button>
+            <header class="header-home">
+                <div class="container">
+                    <div class="logo-wrapper">
+                        <img src="./img/pokeballsvg.png" width="40em" alt="">
+                        <h2>Find your Pokemon</h2>
+                    </div>
                 </div>
             </header>
             
-            <main class="search-container">
-                
-                
-            </main>
-        </section>
+            <div class="container">
+                <button id="menu"></button>
+                    <div class="sub-title">
+                        <input type="text" id="searchInput" placeholder="Enter Pokemon name">
+                        <button id="searchPokemonBtn">Search</button>
+                    </div>
+                    <main class="search-container">
 
-        <section id="teamDisplay">
+                    </main>
+                </div>
         </section>
-
-    </div>
+        
+    </main>
 </body>
 </html>
