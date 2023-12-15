@@ -27,7 +27,8 @@ body {
     height: 100%;
 }
 
-h1 {
+h1,
+h2 {
     text-shadow: 4px 4px 2px black;
     margin-top: 1.5em;
     font-size: 3em;
@@ -63,11 +64,15 @@ main button:last-child {
 
 /* ========================= */
 
-#pokemonSearchDisplay {
+#pokemonSearchDisplay,
+#teamDisplay,
+#reservDisplay {
     display: none;
 }
 
-#pokemonSearchDisplay button {
+#pokemonSearchDisplay button,
+#teamDisplay button,
+#reservDisplay button {
     padding: 0.5em;
     border-radius: 0.5em;
 }
@@ -160,12 +165,14 @@ main button:last-child {
     visibility: hidden;
 }
 
+/* ================== */
+
 @media (min-width: 600px) {
     .search-container {
         margin-top: 3em;
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
