@@ -1,4 +1,4 @@
-import {searchPokemon, team, reserv, startView, pokemonSearchDisplay, menu, teamMenu, reservDisplay, reservMenu} from './DOM.js'
+import {searchPokemon, team, reserv, startView, pokemonSearchDisplay, menu, teamMenu, reservDisplay, reservMenu, teamCounter, reservCounter} from './DOM.js'
 
 import {fromStartviewToPokemonSearchDisplay, fromPokemonSearchDisplayToStartview,
      fromStartViewToTeamView, fromTeamViewToStartView, fromStartViewToReservView,
@@ -20,7 +20,7 @@ reservMenu.addEventListener('click', fromReservViewToStartView)
 // Fetching and Searching Pokemons
 
 const searchBtn = document.querySelector('#searchPokemonBtn')
-const searchInput = document.querySelector('#search-item')
+
 
  const lowerCaseName = (string) => {
      return string.toLowerCase()
@@ -79,17 +79,26 @@ document.body.addEventListener('click', function(e) {
     }
 })
 
+
 //Add to Team
 const addingToTeam = (e) => {
-    const pokemonName = e.target.getAttribute('data-pokemon')
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-        .then((response) => response.json())
-        .then((data) => {
-            myTeam.push(data)
-            renderTeam(); 
-            console.log('Team: ', myTeam)
-        });
-};
+        const pokemonName = e.target.getAttribute('data-pokemon')
+        if (myTeam.length < 3){
+            
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    myTeam.push(data)
+                    renderTeam()
+                    console.log('Team: ', myTeam)
+                })
+                .catch(error => console.error('Error fetching data: ', error))
+        } else {
+            addingToreserv(e)
+        }
+        
+    }
+
 
 //Add to Reserv
 const addingToreserv = (e) => {
@@ -98,11 +107,36 @@ const addingToreserv = (e) => {
     .then((response) => response.json())
     .then((data) => {
         myReserv.push(data)
-        renderReserv(); 
+        renderReserv()
         console.log('Reserv: ', myReserv)
-    });
+    })
+    .catch(error => console.error('Error fetching data: ', error))
 }
 
+//Delete from My Team
+
+document.body.addEventListener('click', function(e) {
+    if (e.target && e.target.classList =='delete-button') {
+        const pokemonName = e.target.getAttribute('data-pokemon-name')
+        myTeam = myTeam.filter(pokemon => pokemon.name !== pokemonName)
+        teamCounter.textContent = `Your Team contains ${myTeam.length} of 3 pokemons`
+        renderTeam(); // Перерисовываем команду
+    }
+});
+
+
+//Gömmer knappar i myTeamDisplay view
+document.body.addEventListener('click', function(e) {
+    if(e.target && e.target.id == 'changeNameBtn') {
+        const buttonsContainer = e.target.closest('.buttons-container')
+        const nameChangerInput = buttonsContainer.querySelector('.nameChanger')
+        const changeNameBtn = buttonsContainer.querySelector('.changeNameBtn')
+        const deleteButton = buttonsContainer.querySelector('.delete-button')
+        nameChangerInput.style.display = 'flex'
+        changeNameBtn.style.display = 'none'
+        deleteButton.style.display = 'none'
+    }
+})
 
 //Showing pokemons on the My Team Page 
 
@@ -123,9 +157,26 @@ const renderTeam = () => {
                 <p class="pokemon-type">Type: ${types}</p>
                 <p class="pokemon-skills">Abilities: ${abilities}</p>
             </div>
+            <div class="buttons-container">
+                      <button class="changeNameBtn">Change name</button>
+                      <button  class="delete-button" data-pokemon-name="${pokemon.name}">Delete</button>
+                      <input type="text" class="nameChanger">
+                      </div>
         `
 
         teamContainer.appendChild(pokemonElement)
+
+        if (teamCounter) {
+            teamCounter.textContent = `Your Team contains ${myTeam.length} of 3 pokemons`
+        } if (myTeam.length === 1){
+            teamCounter.style.backgroundColor = '#80e180'
+
+        } else if (myTeam.length === 2) {
+            teamCounter.style.backgroundColor = '#d3d33d'
+
+        } else{
+            teamCounter.style.backgroundColor = '#eb5b5b'
+        }
     });
 };
 
@@ -152,5 +203,16 @@ const renderReserv = () => {
         `
 
         reservContainer.appendChild(pokemonElement)
+        if (reservCounter) {
+            reservCounter.textContent = `Your Reserv contains ${myReserv.length} pokemons`
+        } if (myReserv.length <= 10){
+            reservCounter.style.backgroundColor = '#80e180'
+
+        } else if (myReserv.length <= 20) {
+            reservCounter.style.backgroundColor = '#d3d33d'
+
+        } else{
+            reservCounter.style.backgroundColor = '#eb5b5b'
+        }
     })
 }

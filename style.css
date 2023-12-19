@@ -25,6 +25,7 @@ body {
     flex-direction: column;
     padding: 1em;
     height: 100%;
+    /* background-color: aquamarine; */
 }
 
 h1,
@@ -34,16 +35,17 @@ h2 {
     font-size: 3em;
     display: flex;
     /* flex-direction: column; */
-    justify-content: center; /* Центрирование по вертикали */
+    justify-content: center;
     align-items: center;
     text-align: center;
+    margin-bottom: 0.7em;
 }
 
 .start-page {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Центрирование по вертикали */
-    align-items: center; /* Центрирование по горизонтали */
+    justify-content: center;
+    align-items: center;
     height: 100%;
 }
 
@@ -94,6 +96,7 @@ main button:last-child {
     flex-direction: column;
     align-items: center;
     height: 100%;
+    /* background-color: aqua; */
 }
 
 .search-item {
@@ -167,6 +170,25 @@ main button:last-child {
 
 /* ================== */
 
+.team-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.team-counter {
+    background-color: #fff;
+    color: black;
+    border-radius: 0.5em;
+    align-self: center;
+    padding: 0.5em;
+    border: 1px solid black;
+}
+
+.nameChanger {
+    display: none;
+    padding: 0.5em;
+}
+
 @media (min-width: 600px) {
     .search-container {
         margin-top: 3em;
@@ -189,5 +211,47 @@ main button:last-child {
 
     .sub-title input {
         width: 20em;
+    }
+
+    .team-header {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .page-container {
+        padding: 3em;
+    }
+}
+
+@media (max-width: 350px) {
+    .team-header {
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+    }
+    #teamDisplay button,
+    #reservMenu {
+        max-width: 46.95px;
+    }
+
+    h2 {
+        margin-top: 0.5em;
+    }
+
+    .team-counter {
+        margin-top: 3em;
+    }
+}
+
+@media (min-width: 1000px) {
+    .start-page {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        height: 200%;
+    }
+    .start-page button {
+        margin-bottom: 0;
     }
 }
