@@ -6,6 +6,7 @@ const reserv = document.querySelector('#reserv')
 
 //Search page elements
 const menu = document.querySelector('#menu')
+const searchBtn = document.querySelector('#searchPokemonBtn')
 
 
 //My Team page elements
@@ -22,4 +23,4 @@ const pokemonSearchDisplay = document.querySelector('#pokemonSearchDisplay')
 const teamDisplay = document.querySelector("#teamDisplay")
 const reservDisplay = document.querySelector('#reservDisplay')
 
-export {searchPokemon, team, reserv, startView, pokemonSearchDisplay, menu, teamDisplay, teamMenu, reservDisplay, reservMenu, teamCounter, reservCounter}
+export {searchPokemon, team, reserv, startView, pokemonSearchDisplay, menu, teamDisplay, teamMenu, reservDisplay, reservMenu, teamCounter, reservCounter,searchBtn}

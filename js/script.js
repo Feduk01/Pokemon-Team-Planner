@@ -1,9 +1,9 @@
-import {searchPokemon, team, reserv, startView, pokemonSearchDisplay, menu, teamMenu, reservDisplay, reservMenu, teamCounter, reservCounter} from './DOM.js'
+import {searchPokemon, team, reserv, startView, pokemonSearchDisplay, menu, teamMenu, reservDisplay, reservMenu, teamCounter, reservCounter, searchBtn} from './DOM.js'
 
 import {fromStartviewToPokemonSearchDisplay, fromPokemonSearchDisplayToStartview,
      fromStartViewToTeamView, fromTeamViewToStartView, fromStartViewToReservView,
     fromReservViewToStartView} from './view.js'
-
+import {getPokemon} from './getPokemon.js'
 
 //Search button
 searchPokemon.addEventListener('click', fromStartviewToPokemonSearchDisplay)
@@ -17,55 +17,21 @@ teamMenu.addEventListener('click', fromTeamViewToStartView)
 reserv.addEventListener('click', fromStartViewToReservView)
 reservMenu.addEventListener('click', fromReservViewToStartView)
 // ========================
-// Fetching and Searching Pokemons
 
-const searchBtn = document.querySelector('#searchPokemonBtn')
-
-
- const lowerCaseName = (string) => {
-     return string.toLowerCase()
-}
+// Fetching and Searching Pokemons (searching pokemons function - getPokemon is inside its own file)
 
 searchBtn.addEventListener('click', getPokemon)
-let allPokemons = [];
+
+export let allPokemons = []
 
 fetch('https://pokeapi.co/api/v2/pokemon?limit=1000') 
     .then(response => response.json())
     .then(data => {
-        allPokemons = data.results;
-    });
-    function getPokemon(e) {
-        e.preventDefault();
-        const searchText = lowerCaseName(document.querySelector('#searchInput').value);
-        const searchContainer = document.querySelector('.search-container');
-        searchContainer.innerHTML = ''; 
-    
-        allPokemons.filter(pokemon => pokemon.name.includes(searchText)).forEach(pokemon => {
-            fetch(pokemon.url)
-                .then(response => response.json())
-                .then(data => {
-                    const types = data.types.map(typeInfo => typeInfo.type.name).join(', '); 
-                    const abilities = data.abilities.map(abilityInfo => abilityInfo.ability.name).join(', ');
-    
-                    searchContainer.innerHTML += `
-                        <div class="search-item">
-                            <img src="${data.sprites.other["official-artwork"].front_default}" alt="${data.name}">
-                            <div class="pokemon-info">
-                                <h3 class="pokemon-name">Name: ${data.name}</h3>
-                                <p class="pokemon-type">Type: ${types}</p>
-                                <p class="pokemon-skills">Abilities: ${abilities}</p>
-                            </div>
-                            <div class="buttons-container">
-                      <button class="add-to-team" id="addToTeam" data-pokemon="${data.name}">Add to Team</button>
-                      <button class="add-to-reserv" id="addToReserv" data-pokemon="${data.name}">Add to Reserv</button>
-                        </div>
-                        </div>`;
-                });
-        });
-    }
+        allPokemons = data.results
+    })
     
 
-// Adding pokemons to My Team and Reserv
+// Creating massives for My Team and Reserv
 let myTeam = []
 let myReserv = []
 
@@ -120,23 +86,48 @@ document.body.addEventListener('click', function(e) {
         const pokemonName = e.target.getAttribute('data-pokemon-name')
         myTeam = myTeam.filter(pokemon => pokemon.name !== pokemonName)
         teamCounter.textContent = `Your Team contains ${myTeam.length} of 3 pokemons`
-        renderTeam(); // Перерисовываем команду
+        renderTeam()
     }
 });
 
 
 //Gömmer knappar i myTeamDisplay view
 document.body.addEventListener('click', function(e) {
-    if(e.target && e.target.id == 'changeNameBtn') {
+    if(e.target && e.target.classList == 'changeNameBtn') {
         const buttonsContainer = e.target.closest('.buttons-container')
         const nameChangerInput = buttonsContainer.querySelector('.nameChanger')
         const changeNameBtn = buttonsContainer.querySelector('.changeNameBtn')
         const deleteButton = buttonsContainer.querySelector('.delete-button')
-        nameChangerInput.style.display = 'flex'
+        nameChangerInput.style.display = 'block'
         changeNameBtn.style.display = 'none'
         deleteButton.style.display = 'none'
+        
     }
 })
+
+// Ändrar namn på pokemons
+document.body.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && e.target.classList.contains('nameChanger') ) {
+        const nameChangerInput = e.target
+        const newName = nameChangerInput.value.trim()
+
+        if (newName) {
+            const pokemonElement = nameChangerInput.closest('.search-item')
+            const pokemonNameElement = pokemonElement.querySelector('.pokemon-name')
+
+            if (pokemonNameElement) {
+                const oldName = pokemonNameElement.textContent.replace('Name: ', '')
+
+                // Найти и обновить покемона в массиве myTeam
+                const pokemonIndex = myTeam.findIndex(pokemon => pokemon.name === oldName)
+                if (pokemonIndex !== -1) {
+                    myTeam[pokemonIndex].name = newName
+                    renderTeam()
+                }
+            }
+        }
+    }
+});
 
 //Showing pokemons on the My Team Page 
 
@@ -153,7 +144,7 @@ const renderTeam = () => {
         pokemonElement.innerHTML = `
             <img src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}">
             <div class="pokemon-info">
-                <h3 class="pokemon-name">Name: ${pokemon.name}</h3>
+                <h3 class="pokemon-name">${pokemon.name}</h3>
                 <p class="pokemon-type">Type: ${types}</p>
                 <p class="pokemon-skills">Abilities: ${abilities}</p>
             </div>
@@ -196,7 +187,7 @@ const renderReserv = () => {
         pokemonElement.innerHTML = `
             <img src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}">
             <div class="pokemon-info">
-                <h3 class="pokemon-name">Name: ${pokemon.name}</h3>
+                <h3 class="pokemon-name">${pokemon.name}</h3>
                 <p class="pokemon-type">Type: ${types}</p>
                 <p class="pokemon-skills">Abilities: ${abilities}</p>
             </div>
