@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Signika&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     /* border: 3px solid black; */
 }
 
@@ -30,7 +33,7 @@ body {
 
 h1,
 h2 {
-    text-shadow: 4px 4px 2px black;
+    text-shadow: 5px 5px 2px black;
     margin-top: 1.5em;
     font-size: 3em;
     display: flex;
@@ -39,6 +42,21 @@ h2 {
     align-items: center;
     text-align: center;
     margin-bottom: 0.7em;
+    font-family: "Press Start 2P";
+}
+
+/* .header,
+.start-page {
+    background-color: aqua;
+} */
+
+button {
+    background-color: #157889;
+    font-family: Signika;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
 .start-page {
@@ -56,8 +74,18 @@ h2 {
     margin-bottom: 3em;
     font-size: 2em;
     border-radius: 1em;
-    box-shadow: 1px 1px 2px black;
-    text-align: center;
+    box-shadow: 2px 2px 2px black;
+    border: 2px solid black;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #1ea4bc;
+    box-shadow: 0px 0px 4px grey;
+}
+
+button:active {
+    transform: translateY(2px);
 }
 
 main button:last-child {
@@ -77,6 +105,7 @@ main button:last-child {
 #reservDisplay button {
     padding: 0.5em;
     border-radius: 0.5em;
+    font-size: 1em;
 }
 
 .sub-title {
@@ -86,8 +115,13 @@ main button:last-child {
 }
 
 .sub-title input {
-    border-radius: 0.5em;
+    border-radius: 1em;
     margin-right: 2em;
+    padding: 1.5em;
+}
+
+#pokemonSearchDisplay .sub-title button {
+    padding: 1em;
 }
 
 .search-container {
@@ -106,13 +140,14 @@ main button:last-child {
     max-width: 20em;
     height: 13em;
     max-height: 15em;
-    background-color: rgb(123, 92, 152);
+    background-color: rgb(125, 140, 48);
     padding: 1em;
     border-radius: 1em;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 1em;
     position: relative;
     transition: all 0.3s ease;
+    border: 2px solid rgba(0, 0, 0, 0.2);
 }
 
 .search-item img {
@@ -130,16 +165,28 @@ main button:last-child {
     justify-content: center;
     grid-column: 2;
     padding-left: 1em;
+    text-shadow: 1px 1px 2px black;
 }
 
 .pokemon-name {
-    font-size: 1.2em;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #e7e7e7;
+}
+
+.pokemon-name:first-letter {
+    text-transform: uppercase;
+}
+
+.pokemon-type {
     margin-bottom: 0.5em;
+    font-size: 1em;
+    color: #e7e7e7;
 }
 
 .pokemon-skills {
     font-size: 1em;
-    color: #fff;
+    color: #e7e7e7;
 }
 
 .buttons-container {
@@ -166,6 +213,12 @@ main button:last-child {
 .search-item:hover img,
 .search-item:hover .pokemon-info {
     visibility: hidden;
+}
+
+#pokemonSearchDisplay .buttons-container button,
+#teamDisplay .buttons-container button {
+    padding: 0.8em;
+    font-size: 1em;
 }
 
 /* ================== */
@@ -253,5 +306,15 @@ main button:last-child {
     }
     .start-page button {
         margin-bottom: 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    .start-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
     }
 }
