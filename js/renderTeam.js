@@ -9,7 +9,7 @@ import {myTeam} from './script.js'
 
  const renderTeam = () => {
     const teamContainer = document.querySelector('#teamContainer')
-    teamContainer.innerHTML = '' // Очистите контейнер перед добавлением новых элементов
+    teamContainer.innerHTML = ''
 
     myTeam.forEach(pokemon => {
         const types = pokemon.types.map(typeInfo => typeInfo.type.name).join(', ')
