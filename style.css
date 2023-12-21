@@ -147,7 +147,7 @@ main button:last-child {
     margin-bottom: 1em;
     position: relative;
     transition: all 0.3s ease;
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .search-item img {
@@ -221,6 +221,11 @@ main button:last-child {
     font-size: 1em;
 }
 
+#teamDisplay .buttons-container button {
+    padding: 0.8em;
+    font-size: 1em;
+    max-width: 128px;
+}
 /* ================== */
 
 .team-header {
@@ -284,7 +289,7 @@ main button:last-child {
     }
     #teamDisplay button,
     #reservMenu {
-        max-width: 46.95px;
+        max-width: 53.3px;
     }
 
     h2 {
@@ -293,6 +298,14 @@ main button:last-child {
 
     .team-counter {
         margin-top: 3em;
+    }
+    .search-item:hover .buttons-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-item:hover .buttons-container :first-child {
+        margin-bottom: 0.9em;
     }
 }
 
